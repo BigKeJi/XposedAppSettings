@@ -239,7 +239,7 @@ public class XposedModActivity extends Activity {
 			}
 		});
 
-		new AlertDialog.Builder(this)
+		new Builder(this)
 			.setTitle(R.string.recents_title)
 			.setAdapter(adapter, new OnClickListener() {
 				@Override
@@ -263,16 +263,16 @@ public class XposedModActivity extends Activity {
 			return;
 		}
 
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		Builder builder = new Builder(this);
 		builder.setTitle(R.string.menu_import);
 		builder.setMessage(R.string.imp_exp_confirm);
-		builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+		builder.setPositiveButton(android.R.string.yes, new OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
 				new ImportTask().execute(backupPrefsFile);
 			}
 		});
-		builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+		builder.setNegativeButton(android.R.string.no, new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// Do nothing
@@ -420,7 +420,7 @@ public class XposedModActivity extends Activity {
 		}
 
 		// Prepare and show the dialog
-		Builder dlgBuilder = new AlertDialog.Builder(this);
+		Builder dlgBuilder = new Builder(this);
 		dlgBuilder.setTitle(R.string.app_name);
 		dlgBuilder.setCancelable(true);
 		dlgBuilder.setIcon(R.drawable.ic_launcher);
@@ -580,7 +580,7 @@ public class XposedModActivity extends Activity {
 				filterComponents = new HashMap<String, FilterItemComponent>();
 				for (SettingInfo setting : settings) {
 					FilterItemComponent component = new FilterItemComponent(XposedModActivity.this, setting.label, null, null, null);
-					component.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+					component.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 					component.setFilterState(setting.filter);
 					entriesView.addView(component);
 					filterComponents.put(setting.settingKey, component);
@@ -646,7 +646,7 @@ public class XposedModActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 
-				AlertDialog.Builder bld = new AlertDialog.Builder(XposedModActivity.this);
+				Builder bld = new Builder(XposedModActivity.this);
 				bld.setCancelable(true);
 				bld.setTitle(R.string.perms_filter_title);
 
@@ -664,7 +664,7 @@ public class XposedModActivity extends Activity {
 					}
 				}
 				final PermissionsListAdapter adapter = new PermissionsListAdapter(XposedModActivity.this, items, new HashSet<String>(), false);
-				bld.setAdapter(adapter, new DialogInterface.OnClickListener() {
+				bld.setAdapter(adapter, new OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						filterPermissionUsage = adapter.getItem(which).name;
@@ -690,7 +690,7 @@ public class XposedModActivity extends Activity {
 				});
 				bld.setView(permsView);
 
-				bld.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+				bld.setNegativeButton(android.R.string.cancel, new OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						filterPermissionUsage = null;
